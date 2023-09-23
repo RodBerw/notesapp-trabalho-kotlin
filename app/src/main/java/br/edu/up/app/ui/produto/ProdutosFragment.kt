@@ -9,11 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.edu.up.app.R
-import br.edu.up.app.ui.produto.placeholder.PlaceholderContent
+import br.edu.up.app.data.Repository
 
-/**
- * A fragment representing a list of Items.
- */
 class ProdutosFragment : Fragment() {
 
     private var columnCount = 1
@@ -39,7 +36,7 @@ class ProdutosFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = ProdutosAdapter(PlaceholderContent.ITEMS)
+                adapter = ProdutosAdapter(Repository.produtos())
             }
         }
         return view
