@@ -8,8 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import br.edu.up.app.R
-import br.edu.up.app.data.Repository
+import br.edu.up.app.data.BancoSQLite
+import br.edu.up.app.data.ProdutoRepository
+import br.edu.up.app.databinding.FragmentListProdutosBinding
+import br.edu.up.app.databinding.FragmentProdutoBinding
+import kotlinx.coroutines.launch
 
 class ProdutosFragment : Fragment() {
 
@@ -27,19 +34,28 @@ class ProdutosFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_list_produtos, container, false)
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
+        val banco = BancoSQLite.get(requireContext())
+        val repository = ProdutoRepository(banco.produtoDao())
+        val viewModel = ProdutoViewModel(repository)
+        val binding = FragmentListProdutosBinding.inflate(layoutInflater)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.produtos.collect{ produtos ->
+                    if (binding.root is RecyclerView) {
+                        val recyclerView = binding.root
+                        with(recyclerView) {
+                            layoutManager = LinearLayoutManager(context)
+                            adapter = ProdutosAdapter(produtos)
+                        }
+                    }
                 }
-                adapter = ProdutosAdapter(Repository.produtos())
             }
+
         }
-        return view
+
+
+        return binding.root
     }
 
     companion object {

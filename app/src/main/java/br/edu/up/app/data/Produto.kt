@@ -6,13 +6,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "produtos")
 data class Produto(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val nome: String,
-    val descricao: String,
-    val preco: Double,
-    val peso: Int,
-    val foto: String,
-    val categoria: Int
+    var id: Int,
+    var nome: String,
+    var descricao: String,
+    var preco: Double,
+    var peso: Int,
+    var foto: String,
+    var categoria: Int
 )
 {
     constructor():this(

@@ -43,6 +43,11 @@ class ProdutosAdapter(
             view.findNavController().navigate(action)
         }
 
+//        holder.itemView.setOnLongClickListener { view ->
+//
+//
+//        }
+
     }
 
     override fun getItemCount(): Int = produtos.size

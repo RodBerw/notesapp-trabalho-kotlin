@@ -1,32 +1,37 @@
 package br.edu.up.app.ui.produto
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import br.edu.up.app.R
+import br.edu.up.app.data.BancoSQLite
+import br.edu.up.app.data.ProdutoRepository
+import br.edu.up.app.databinding.FragmentProdutoBinding
 
 class ProdutoFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ProdutoFragment()
-    }
-
-    private lateinit var viewModel: ProdutoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_produto, container, false)
-    }
+        val banco = BancoSQLite.get(requireContext())
+        val repository = ProdutoRepository(banco.produtoDao())
+        val viewModel = ProdutoViewModel(repository)
+        val binding = FragmentProdutoBinding.inflate(layoutInflater)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProdutoViewModel::class.java)
-        // TODO: Use the ViewModel
+        //binding.inputNome.text = viewModel.produto.nome
+        binding.btnSalvar.setOnClickListener {
+            viewModel.produto.nome = binding.inputNome.text.toString()
+            viewModel.produto.descricao = binding.inputDesc.text.toString()
+            viewModel.produto.preco = binding.inputPreco.text.toString().toDouble()
+            viewModel.produto.peso = binding.inputPeso.text.toString().toInt()
+            viewModel.produto.foto = binding.inputFoto.text.toString()
+            viewModel.salvar()
+            findNavController().popBackStack()
+        }
+        return binding.root
     }
-
 }
