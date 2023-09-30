@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import br.edu.up.app.AppCardapio
 import br.edu.up.app.R
 import br.edu.up.app.data.BancoSQLite
 import br.edu.up.app.data.ProdutoRepository
@@ -35,10 +36,15 @@ class ProdutosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val banco = BancoSQLite.get(requireContext())
-        val repository = ProdutoRepository(banco.produtoDao())
-        val viewModel = ProdutoViewModel(repository)
+//        val banco = BancoSQLite.get(requireContext())
+//        val repository = ProdutoRepository(banco.produtoDao())
+//        val viewModel = ProdutoViewModel(repository)
+
+        val context = requireActivity().applicationContext
+        val viewModel = (context as AppCardapio).viewModel
+
         val binding = FragmentListProdutosBinding.inflate(layoutInflater)
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.produtos.collect{ produtos ->
@@ -46,15 +52,13 @@ class ProdutosFragment : Fragment() {
                         val recyclerView = binding.root
                         with(recyclerView) {
                             layoutManager = LinearLayoutManager(context)
-                            adapter = ProdutosAdapter(produtos)
+                            adapter = ProdutosAdapter(produtos,viewModel)
                         }
                     }
                 }
             }
 
         }
-
-
         return binding.root
     }
 

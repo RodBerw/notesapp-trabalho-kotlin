@@ -26,7 +26,7 @@ class ProdutoRepository(val produtoDao: ProdutoDao) {
 //        CoroutineScope(Job()).launch {
 //            produtoDao.excluirTodos()
 //            Log.i("Cardapio", "-----------> Limpou a base de dados!")
-//            delay(15000)
+//            //delay(15000)
 //            val produtos = produtos()
 //            for(p in produtos){
 //                produtoDao.inserir(p)

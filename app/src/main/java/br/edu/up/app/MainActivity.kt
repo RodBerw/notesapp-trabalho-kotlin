@@ -11,7 +11,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import br.edu.up.app.data.BancoSQLite
+import br.edu.up.app.data.ProdutoRepository
 import br.edu.up.app.databinding.ActivityMainBinding
+import br.edu.up.app.ui.produto.ProdutoViewModel
 import br.edu.up.app.ui.produto.ProdutosFragmentDirections
 
 class MainActivity : AppCompatActivity() {
@@ -22,12 +25,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        val banco = BancoSQLite.get(applicationContext)
+//        val repository = ProdutoRepository(banco.produtoDao())
+//        val viewModel = ProdutoViewModel(repository)
+
+        val viewModel = (application as AppCardapio).viewModel
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
+            viewModel.novo()
             val action = ProdutosFragmentDirections.actionListaToProduto()
             findNavController(R.id.nav_host_fragment_content_main)
                 .navigate(action)
