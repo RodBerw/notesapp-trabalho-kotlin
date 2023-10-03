@@ -4,12 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.edu.up.app.data.Produto
 import br.edu.up.app.data.ProdutoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProdutoViewModel(val repository: ProdutoRepository) : ViewModel() {
+@HiltViewModel
+class ProdutoViewModel
+    @Inject constructor(val repository: ProdutoRepository) : ViewModel() {
 
     var produto: Produto = Produto()
 

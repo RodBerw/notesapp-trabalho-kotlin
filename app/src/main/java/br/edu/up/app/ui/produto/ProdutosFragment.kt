@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -17,8 +18,10 @@ import br.edu.up.app.data.BancoSQLite
 import br.edu.up.app.data.ProdutoRepository
 import br.edu.up.app.databinding.FragmentListProdutosBinding
 import br.edu.up.app.databinding.FragmentProdutoBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ProdutosFragment : Fragment() {
 
     private var columnCount = 1
@@ -40,8 +43,10 @@ class ProdutosFragment : Fragment() {
 //        val repository = ProdutoRepository(banco.produtoDao())
 //        val viewModel = ProdutoViewModel(repository)
 
-        val context = requireActivity().applicationContext
-        val viewModel = (context as AppCardapio).viewModel
+//        val context = requireActivity().applicationContext
+//        val viewModel = (context as AppCardapio).viewModel
+
+        val viewModel : ProdutoViewModel by activityViewModels()
 
         val binding = FragmentListProdutosBinding.inflate(layoutInflater)
 

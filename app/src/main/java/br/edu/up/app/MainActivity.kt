@@ -2,6 +2,7 @@ package br.edu.up.app
 
 import android.os.Bundle
 import android.view.Menu
+import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -16,7 +17,9 @@ import br.edu.up.app.data.ProdutoRepository
 import br.edu.up.app.databinding.ActivityMainBinding
 import br.edu.up.app.ui.produto.ProdutoViewModel
 import br.edu.up.app.ui.produto.ProdutosFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -29,7 +32,9 @@ class MainActivity : AppCompatActivity() {
 //        val repository = ProdutoRepository(banco.produtoDao())
 //        val viewModel = ProdutoViewModel(repository)
 
-        val viewModel = (application as AppCardapio).viewModel
+        //val viewModel = (application as AppCardapio).viewModel
+
+        val viewModel : ProdutoViewModel by viewModels()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

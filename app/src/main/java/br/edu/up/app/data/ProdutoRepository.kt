@@ -6,8 +6,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProdutoRepository(val produtoDao: ProdutoDao) {
+class ProdutoRepository
+    @Inject constructor(val produtoDao: ProdutoDao) {
 
     val produtos: Flow<List<Produto>>
             get() = produtoDao.listar()

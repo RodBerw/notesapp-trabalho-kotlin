@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import br.edu.up.app.AppCardapio
 import br.edu.up.app.R
 import br.edu.up.app.data.BancoSQLite
 import br.edu.up.app.data.ProdutoRepository
 import br.edu.up.app.databinding.FragmentProdutoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProdutoFragment : Fragment() {
 
     override fun onCreateView(
@@ -23,8 +26,10 @@ class ProdutoFragment : Fragment() {
 //        val repository = ProdutoRepository(banco.produtoDao())
 //        val viewModel = ProdutoViewModel(repository)
 
-        val context = requireActivity().applicationContext
-        val viewModel = (context as AppCardapio).viewModel
+//        val context = requireActivity().applicationContext
+//        val viewModel = (context as AppCardapio).viewModel
+
+        val viewModel : ProdutoViewModel by activityViewModels()
 
         val binding = FragmentProdutoBinding.inflate(layoutInflater)
 
