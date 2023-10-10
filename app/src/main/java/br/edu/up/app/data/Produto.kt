@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Produto(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
+    var docId: String,
     var nome: String,
     var descricao: String,
     var preco: Double,
@@ -17,6 +18,7 @@ data class Produto(
 {
     constructor():this(
         0,
+        "",
         "",
         "",
         0.0,

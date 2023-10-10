@@ -2,10 +2,10 @@ package br.edu.up.app
 
 import android.app.Application
 import android.content.Context
-import br.edu.up.app.data.BancoSQLite
-import br.edu.up.app.data.ProdutoDao
-import br.edu.up.app.data.ProdutoRepository
-import br.edu.up.app.ui.produto.ProdutoViewModel
+import br.edu.up.app.data.*
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,13 +21,28 @@ import javax.inject.Singleton
 class AppCardapio : Application() {
 
     @Provides
-    fun provideProdutoReposity(produtoDao: ProdutoDao) : ProdutoRepository{
-        return ProdutoRepository(produtoDao)
+    fun provideProdutoReposity(produtoDao: ProdutoDao)
+            : ProdutoRepositorySQLite{
+        return ProdutoRepositorySQLite(produtoDao)
     }
+
+    @Provides
+    fun provideProdutoRepositoryFirebase(produtosRef: CollectionReference)
+            : ProdutoRepository {
+        return  ProdutoRepositoryFirebase(produtosRef)
+    }
+
     @Provides
     fun provideProdutoDao(banco: BancoSQLite) : ProdutoDao{
         return banco.produtoDao()
     }
+    @Provides
+    fun provideProdutosRef(): CollectionReference{
+        return Firebase.firestore.collection("produtos")
+    }
+
+
+
     @Provides
     @Singleton
     fun provideBanco(@ApplicationContext ctx: Context) : BancoSQLite{

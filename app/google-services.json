@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "739282525899",
+    "project_id": "appcardapion",
+    "storage_bucket": "appcardapion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739282525899:android:63521db9bd6b42af55054e",
+        "android_client_info": {
+          "package_name": "br.edu.up.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9cZSUPHUorQqQ_agaKSPmzwLdiTfTDt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
