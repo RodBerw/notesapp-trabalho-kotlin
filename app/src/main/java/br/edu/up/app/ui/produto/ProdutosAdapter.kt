@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
+import br.edu.up.app.R
 import br.edu.up.app.data.Fotos
 import br.edu.up.app.data.Produto
 import br.edu.up.app.databinding.FragmentItemProdutoBinding
+import coil.load
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import java.text.DecimalFormat
 import java.util.Locale
 
@@ -33,8 +37,19 @@ class ProdutosAdapter(
 
     override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
         val produto = produtos[position]
-        val imgId = Fotos.get(produto.foto)
-        holder.imgFoto.setImageResource(imgId)
+
+        holder.imgFoto.load(R.drawable.semfoto)
+
+        Firebase.storage.getReference(produto.foto).downloadUrl
+            .addOnSuccessListener { imageUrl ->
+            holder.imgFoto.load(imageUrl)
+        }
+
+
+        //val imgId = Fotos.get(produto.foto)
+        //holder.imgFoto.setImageResource(imgId)
+
+
         holder.txtNome.text = produto.nome
         val localBrasil = Locale("pt", "BR")
         val df = DecimalFormat.getCurrencyInstance(localBrasil)
