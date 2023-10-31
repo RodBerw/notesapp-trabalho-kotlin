@@ -7,10 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import br.edu.up.app.AppCardapio
-import br.edu.up.app.R
-import br.edu.up.app.data.BancoSQLite
-import br.edu.up.app.data.ProdutoRepository
 import br.edu.up.app.databinding.FragmentProdutoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +29,7 @@ class ProdutoFragment : Fragment() {
 
         val binding = FragmentProdutoBinding.inflate(layoutInflater)
 
-        var produto = viewModel.produto
+        var produto = viewModel.note
         binding.inputNome.setText(produto.nome)
         binding.inputDesc.setText(produto.descricao)
         binding.inputPreco.setText(produto.preco.toString())
@@ -42,12 +38,12 @@ class ProdutoFragment : Fragment() {
 
         binding.btnSalvar.setOnClickListener {
             try {
-                viewModel.produto.nome = binding.inputNome.text.toString()
-                viewModel.produto.descricao = binding.inputDesc.text.toString()
-                viewModel.produto.preco = binding.inputPreco.text.toString().toDouble()
-                viewModel.produto.peso = binding.inputPeso.text.toString().toInt()
-                viewModel.produto.foto = binding.inputFoto.text.toString()
-                viewModel.produto.categoria = 0
+                viewModel.note.nome = binding.inputNome.text.toString()
+                viewModel.note.descricao = binding.inputDesc.text.toString()
+                viewModel.note.preco = binding.inputPreco.text.toString().toDouble()
+                viewModel.note.peso = binding.inputPeso.text.toString().toInt()
+                viewModel.note.foto = binding.inputFoto.text.toString()
+                viewModel.note.categoria = 0
             } catch (e: Exception){
             }
             viewModel.salvar()

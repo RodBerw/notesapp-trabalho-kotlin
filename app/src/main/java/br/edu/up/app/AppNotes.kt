@@ -18,22 +18,22 @@ import javax.inject.Singleton
 @Module
 @HiltAndroidApp
 @InstallIn(SingletonComponent::class)
-class AppCardapio : Application() {
+class AppNotes : Application() {
 
     @Provides
-    fun provideProdutoReposity(produtoDao: ProdutoDao)
-            : ProdutoRepositorySQLite{
-        return ProdutoRepositorySQLite(produtoDao)
+    fun provideProdutoReposity(notesDao: NotesDao)
+            : NoteRepositorySQLite{
+        return NoteRepositorySQLite(notesDao)
     }
 
     @Provides
     fun provideProdutoRepositoryFirebase(produtosRef: CollectionReference)
-            : ProdutoRepository {
-        return  ProdutoRepositoryFirebase(produtosRef)
+            : NoteRepository {
+        return  NoteRepositoryFirebase(produtosRef)
     }
 
     @Provides
-    fun provideProdutoDao(banco: BancoSQLite) : ProdutoDao{
+    fun provideProdutoDao(banco: BancoSQLite) : NotesDao{
         return banco.produtoDao()
     }
     @Provides

@@ -2,23 +2,22 @@ package br.edu.up.app.ui.produto
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.edu.up.app.data.Produto
-import br.edu.up.app.data.ProdutoRepository
+import br.edu.up.app.data.Note
+import br.edu.up.app.data.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProdutoViewModel
-    @Inject constructor(val repository: ProdutoRepository) : ViewModel() {
+    @Inject constructor(val repository: NoteRepository) : ViewModel() {
 
-    var produto: Produto = Produto()
+    var note: Note = Note()
 
-    private var _produtos = MutableStateFlow(listOf<Produto>())
-    val produtos : Flow<List<Produto>> = _produtos
+    private var _produtos = MutableStateFlow(listOf<Note>())
+    val produtos : Flow<List<Note>> = _produtos
 
     init {
         viewModelScope.launch {
@@ -29,19 +28,19 @@ class ProdutoViewModel
     }
 
     fun novo(){
-        this.produto = Produto()
+        this.note = Note()
     }
 
-    fun editar(produto: Produto){
-        this.produto = produto
+    fun editar(note: Note){
+        this.note = note
     }
 
     fun salvar() = viewModelScope.launch {
-        repository.salvar(produto)
+        repository.salvar(note)
     }
 
-    fun excluir(produto: Produto) = viewModelScope.launch {
-        repository.excluir(produto)
+    fun excluir(note: Note) = viewModelScope.launch {
+        repository.excluir(note)
     }
 }
 

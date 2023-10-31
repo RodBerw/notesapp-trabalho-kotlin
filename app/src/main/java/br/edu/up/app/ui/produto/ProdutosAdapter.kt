@@ -8,8 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import br.edu.up.app.R
-import br.edu.up.app.data.Fotos
-import br.edu.up.app.data.Produto
+import br.edu.up.app.data.Note
 import br.edu.up.app.databinding.FragmentItemProdutoBinding
 import coil.load
 import com.google.firebase.ktx.Firebase
@@ -18,7 +17,7 @@ import java.text.DecimalFormat
 import java.util.Locale
 
 class ProdutosAdapter(
-    private val produtos: List<Produto>,
+    private val notes: List<Note>,
     val viewModel: ProdutoViewModel
 ) : RecyclerView.Adapter<ProdutosAdapter.ProdutoViewHolder>() {
 
@@ -36,7 +35,7 @@ class ProdutosAdapter(
     }
 
     override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
-        val produto = produtos[position]
+        val produto = notes[position]
 
         holder.imgFoto.load(R.drawable.semfoto)
 
@@ -75,7 +74,7 @@ class ProdutosAdapter(
 
     }
 
-    override fun getItemCount(): Int = produtos.size
+    override fun getItemCount(): Int = notes.size
 
     inner class ProdutoViewHolder(binding: FragmentItemProdutoBinding) :
         RecyclerView.ViewHolder(binding.root) {

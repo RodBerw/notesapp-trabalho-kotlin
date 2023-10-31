@@ -6,10 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlin.concurrent.Volatile
 
-@Database(entities = [Produto::class], version = 1)
+@Database(entities = [Note::class], version = 1)
 abstract class BancoSQLite : RoomDatabase() {
 
-    abstract fun produtoDao(): ProdutoDao
+    abstract fun noteDao(): NotesDao
     companion object{
 
         @Volatile
@@ -22,7 +22,7 @@ abstract class BancoSQLite : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         BancoSQLite::class.java,
-                        "meu_banco.db"
+                        "database.db"
                         ).build()
                 }
             }
