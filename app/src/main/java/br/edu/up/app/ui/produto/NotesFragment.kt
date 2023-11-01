@@ -1,5 +1,6 @@
 package br.edu.up.app.ui.produto
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,23 +12,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import br.edu.up.app.databinding.FragmentListProdutosBinding
+import androidx.recyclerview.widget.GridLayoutManager
+import br.edu.up.app.databinding.FragmentNotesRecyclerBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProdutosFragment : Fragment() {
+class NotesFragment : Fragment() {
 
-    private var columnCount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
     }
 
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,18 +38,18 @@ class ProdutosFragment : Fragment() {
 //        val context = requireActivity().applicationContext
 //        val viewModel = (context as AppCardapio).viewModel
 
-        val viewModel : ProdutoViewModel by activityViewModels()
+        val viewModel : NoteViewModel by activityViewModels()
 
-        val binding = FragmentListProdutosBinding.inflate(layoutInflater)
+        val binding = FragmentNotesRecyclerBinding.inflate(layoutInflater)
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.produtos.collect{ produtos ->
-                    if (binding.root is RecyclerView) {
-                        val recyclerView = binding.root
+                viewModel.notes.collect{ notes ->
+                    if (binding.rvNotes is RecyclerView) {
+                        val recyclerView = binding.rvNotes
                         with(recyclerView) {
-                            layoutManager = LinearLayoutManager(context)
-                            adapter = ProdutosAdapter(produtos,viewModel)
+                            layoutManager = GridLayoutManager(context, 2)
+                            adapter = NotesAdapter(notes,viewModel)
                         }
                     }
                 }
@@ -69,7 +67,7 @@ class ProdutosFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            ProdutosFragment().apply {
+            NotesFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }

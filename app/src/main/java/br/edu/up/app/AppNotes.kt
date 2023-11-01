@@ -21,26 +21,25 @@ import javax.inject.Singleton
 class AppNotes : Application() {
 
     @Provides
-    fun provideProdutoReposity(notesDao: NotesDao)
+    fun provideNoteRepository(notesDao: NotesDao)
             : NoteRepositorySQLite{
         return NoteRepositorySQLite(notesDao)
     }
 
     @Provides
-    fun provideProdutoRepositoryFirebase(produtosRef: CollectionReference)
+    fun provideNoteRepositoryFirebase(produtosRef: CollectionReference)
             : NoteRepository {
         return  NoteRepositoryFirebase(produtosRef)
     }
 
     @Provides
-    fun provideProdutoDao(banco: BancoSQLite) : NotesDao{
-        return banco.produtoDao()
+    fun provideNoteDao(banco: BancoSQLite) : NotesDao{
+        return banco.noteDao()
     }
     @Provides
-    fun provideProdutosRef(): CollectionReference{
-        return Firebase.firestore.collection("produtos")
+    fun provideNotesRef(): CollectionReference{
+        return Firebase.firestore.collection("notes")
     }
-
 
 
     @Provides
@@ -49,12 +48,4 @@ class AppNotes : Application() {
         return BancoSQLite.get(ctx)
     }
 
-//    lateinit var viewModel: ProdutoViewModel
-//
-//    override fun onCreate() {
-//        super.onCreate()
-//        val banco = BancoSQLite.get(applicationContext)
-//        val repository = ProdutoRepository(banco.produtoDao())
-//        viewModel = ProdutoViewModel(repository)
-//    }
 }

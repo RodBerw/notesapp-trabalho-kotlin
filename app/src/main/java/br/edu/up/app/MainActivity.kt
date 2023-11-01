@@ -12,8 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.up.app.databinding.ActivityMainBinding
-import br.edu.up.app.ui.produto.ProdutoViewModel
-import br.edu.up.app.ui.produto.ProdutosFragmentDirections
+import br.edu.up.app.ui.produto.NoteViewModel
+import br.edu.up.app.ui.produto.NotesFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         //val viewModel = (application as AppCardapio).viewModel
 
-        val viewModel : ProdutoViewModel by viewModels()
+        val viewModel : NoteViewModel by viewModels()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
-            viewModel.novo()
-            val action = ProdutosFragmentDirections.actionListaToProduto()
+            viewModel.new()
+            val action = NotesFragmentDirections.actionHomeToNote()
             findNavController(R.id.nav_host_fragment_content_main)
                 .navigate(action)
         }

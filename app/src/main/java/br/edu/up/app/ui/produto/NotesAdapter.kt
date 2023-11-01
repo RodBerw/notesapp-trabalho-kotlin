@@ -9,23 +9,23 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import br.edu.up.app.R
 import br.edu.up.app.data.Note
-import br.edu.up.app.databinding.FragmentItemProdutoBinding
+import br.edu.up.app.databinding.FragmentNoteBinding
 import coil.load
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.text.DecimalFormat
 import java.util.Locale
 
-class ProdutosAdapter(
+class NotesAdapter(
     private val notes: List<Note>,
-    val viewModel: ProdutoViewModel
-) : RecyclerView.Adapter<ProdutosAdapter.ProdutoViewHolder>() {
+    val viewModel: NoteViewModel
+) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            ProdutoViewHolder {
+            NoteViewHolder {
 
-        return ProdutoViewHolder(
-            FragmentItemProdutoBinding.inflate(
+        return NoteViewHolder(
+            FragmentNoteBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -34,29 +34,14 @@ class ProdutosAdapter(
 
     }
 
-    override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
-        val produto = notes[position]
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+        val note = notes[position]
 
-        holder.imgFoto.load(R.drawable.semfoto)
-
-        Firebase.storage.getReference(produto.foto).downloadUrl
-            .addOnSuccessListener { imageUrl ->
-            holder.imgFoto.load(imageUrl)
-        }
-
-
-        //val imgId = Fotos.get(produto.foto)
-        //holder.imgFoto.setImageResource(imgId)
-
-
-        holder.txtNome.text = produto.nome
-        val localBrasil = Locale("pt", "BR")
-        val df = DecimalFormat.getCurrencyInstance(localBrasil)
-        holder.txtPreco.text = "${df.format(produto.preco)}"
+        holder.txtNotation.text = note.notation
 
         holder.itemView.setOnClickListener { view ->
-            viewModel.editar(produto)
-            val action = ProdutosFragmentDirections.actionListaToProduto()
+            viewModel.edit(note)
+            val action = NotesFragmentDirections.actionHomeToNote()
             view.findNavController().navigate(action)
         }
 
@@ -64,7 +49,7 @@ class ProdutosAdapter(
             AlertDialog.Builder(view.context)
                 .setMessage("ATENÇÃO")
                 .setPositiveButton("Confirmar") { dialog, id ->
-                    viewModel.excluir(produto)
+                    viewModel.delete(note)
                 }
                 .setNegativeButton("CANCELAR") { dialog, id ->
                     //ignorar
@@ -76,11 +61,9 @@ class ProdutosAdapter(
 
     override fun getItemCount(): Int = notes.size
 
-    inner class ProdutoViewHolder(binding: FragmentItemProdutoBinding) :
+    inner class NoteViewHolder(binding: FragmentNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val imgFoto: ImageView = binding.imgFoto
-        val txtNome: TextView = binding.txtNome
-        val txtPreco: TextView = binding.txtPreco
+        val txtNotation: TextView = binding.txtNotation
     }
 
 }

@@ -11,36 +11,40 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProdutoViewModel
+class NoteViewModel
+    //Faz a injeção de dependências usando a interface NoteRepository
     @Inject constructor(val repository: NoteRepository) : ViewModel() {
 
     var note: Note = Note()
 
-    private var _produtos = MutableStateFlow(listOf<Note>())
-    val produtos : Flow<List<Note>> = _produtos
+    private var _notes = MutableStateFlow(listOf<Note>())
+    val notes : Flow<List<Note>> = _notes
 
+    //Da launch na viewmodel
     init {
         viewModelScope.launch {
-            repository.produtos.collect{ produtos ->
-                _produtos.value = produtos
+            //Observa constantemente o valor da lista notes fornecido pelo repositório,
+            // e reaje sempre que atualizado
+            repository.notes.collect{ notes ->
+                _notes.value = notes
             }
         }
     }
 
-    fun novo(){
+    fun new(){
         this.note = Note()
     }
 
-    fun editar(note: Note){
+    fun edit(note: Note){
         this.note = note
     }
 
-    fun salvar() = viewModelScope.launch {
-        repository.salvar(note)
+    fun save() = viewModelScope.launch {
+        repository.save(note)
     }
 
-    fun excluir(note: Note) = viewModelScope.launch {
-        repository.excluir(note)
+    fun delete(note: Note) = viewModelScope.launch {
+        repository.delete(note)
     }
 }
 
