@@ -8,7 +8,7 @@ class NoteRepositorySQLite
     : NoteRepository {
 
     override val notes: Flow<List<Note>>
-        get() = notesDao.list()
+    get() = notesDao.list()
 
     override suspend fun save(note: Note) {
         if (note.id == 0) {

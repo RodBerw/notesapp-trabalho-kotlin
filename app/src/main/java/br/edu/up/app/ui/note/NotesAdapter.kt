@@ -1,20 +1,13 @@
-package br.edu.up.app.ui.produto
+package br.edu.up.app.ui.note
 
 import android.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
-import br.edu.up.app.R
 import br.edu.up.app.data.Note
 import br.edu.up.app.databinding.FragmentNoteBinding
-import coil.load
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import java.text.DecimalFormat
-import java.util.Locale
 
 class NotesAdapter(
     private val notes: List<Note>,

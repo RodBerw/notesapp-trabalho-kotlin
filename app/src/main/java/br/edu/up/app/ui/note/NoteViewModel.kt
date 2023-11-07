@@ -1,4 +1,4 @@
-package br.edu.up.app.ui.produto
+package br.edu.up.app.ui.note
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

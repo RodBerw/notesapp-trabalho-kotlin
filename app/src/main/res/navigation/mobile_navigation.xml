@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="br.edu.up.app.ui.produto.NotesFragment"
+        android:name="br.edu.up.app.ui.note.NotesFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_notes_recycler" >
         <action
@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/produtoFragment"
-        android:name="br.edu.up.app.ui.produto.NoteFragment"
+        android:name="br.edu.up.app.ui.note.NoteFragment"
         android:label="fragment_produto"
         tools:layout="@layout/fragment_create_note" />
 </navigation>

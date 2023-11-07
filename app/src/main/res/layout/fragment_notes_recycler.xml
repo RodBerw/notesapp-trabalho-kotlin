@@ -8,7 +8,7 @@
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.produto.NotesFragment"
+    tools:context=".ui.note.NotesFragment"
     tools:listitem="@layout/fragment_note">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -25,17 +25,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.307" />
 
-    <ImageButton
-        android:id="@+id/btnAddNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:contentDescription="Add note button"
-        android:src="@drawable/addnotebtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvNotes"
-        app:layout_constraintVertical_bias="0.804" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.produto.NoteFragment" >
+    tools:context=".ui.note.NoteFragment" >
 
     <TextView
         android:layout_width="match_parent"
@@ -26,6 +26,7 @@
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            app:srcCompat="@drawable/postit"
             tools:srcCompat="@drawable/postit" />
 
         <com.google.android.material.textfield.TextInputLayout

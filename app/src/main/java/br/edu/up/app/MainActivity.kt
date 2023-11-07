@@ -12,8 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.up.app.databinding.ActivityMainBinding
-import br.edu.up.app.ui.produto.NoteViewModel
-import br.edu.up.app.ui.produto.NotesFragmentDirections
+import br.edu.up.app.ui.note.NoteViewModel
+import br.edu.up.app.ui.note.NotesFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

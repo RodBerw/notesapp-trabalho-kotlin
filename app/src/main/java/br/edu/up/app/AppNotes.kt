@@ -22,14 +22,14 @@ class AppNotes : Application() {
 
     @Provides
     fun provideNoteRepository(notesDao: NotesDao)
-            : NoteRepositorySQLite{
+            : NoteRepository{
         return NoteRepositorySQLite(notesDao)
     }
 
     @Provides
-    fun provideNoteRepositoryFirebase(produtosRef: CollectionReference)
-            : NoteRepository {
-        return  NoteRepositoryFirebase(produtosRef)
+    fun provideNoteRepositoryFirebase(notesRef: CollectionReference)
+            : NoteRepositoryFirebase {
+        return  NoteRepositoryFirebase(notesRef)
     }
 
     @Provides
