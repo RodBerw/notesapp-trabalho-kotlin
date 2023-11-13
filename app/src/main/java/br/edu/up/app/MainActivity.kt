@@ -36,11 +36,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.appBarMain.toolbar)
+        //setSupportActionBar(binding.appBarMain.toolbar)
+        //setActionBar()
 
-        binding.appBarMain.fab.setOnClickListener { view ->
+        binding.appBarMain.fabAddNotes.setOnClickListener { view ->
             viewModel.new()
             val action = NotesFragmentDirections.actionHomeToNote()
+            findNavController(R.id.nav_host_fragment_content_main)
+                .navigate(action)
+        }
+        binding.appBarMain.fabOptions.setOnClickListener{view ->
+            viewModel.new()
+            val action = NotesFragmentDirections.actionNavHomeToNavGallery()
             findNavController(R.id.nav_host_fragment_content_main)
                 .navigate(action)
         }
@@ -51,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_options, R.id.nav_slideshow
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

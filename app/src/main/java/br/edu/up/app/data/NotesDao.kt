@@ -18,4 +18,5 @@ interface NotesDao {
     suspend fun delete(id: Int)
     @Query("delete from notes")
     suspend fun deleteAll()
+
 }
