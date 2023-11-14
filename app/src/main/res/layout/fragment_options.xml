@@ -21,6 +21,21 @@
         app:srcCompat="@drawable/postit" />
 
     <TextView
+        android:id="@+id/txt_notation_ex"
+        android:layout_width="122dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="32dp"
+        android:padding="5dp"
+        android:text="Write here..."
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_font_size" />
+
+    <TextView
         android:id="@+id/text_options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,12 +85,12 @@
         app:layout_constraintVertical_bias="0.07999998" />
 
     <TextView
-        android:id="@+id/text_postit_color"
+        android:id="@+id/txt_fontSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="14sp"
+        android:text="16sp"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,18 +99,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_postit_color2"
         app:layout_constraintVertical_bias="0.050000012" />
-
-    <TextView
-        android:id="@+id/text_notation_ex"
-        android:layout_width="121dp"
-        android:layout_height="92dp"
-        android:text="Write here..."
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgPostItEx"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_font_size"
-        app:layout_constraintVertical_bias="0.147" />
 
     <RadioGroup
         android:id="@+id/rg_colors"
@@ -138,6 +141,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="50dp"
         android:layout_weight="1"
+        android:checked="false"
         android:scaleX="2"
         android:scaleY="2"
         android:text="Dark Mode"
@@ -152,9 +156,10 @@
         android:layout_width="163dp"
         android:layout_height="40dp"
         android:indeterminate="false"
+        android:max="8"
         android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_postit_color" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_fontSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
