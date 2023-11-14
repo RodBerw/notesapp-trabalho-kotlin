@@ -35,6 +35,9 @@ class OptionsFragment : Fragment() {
         var sbFontSize: SeekBar = binding.sbFontSize
         var postItImgName: String = view?.findViewById<RadioButton>(binding.rgColors.checkedRadioButtonId)?.text.toString()
 
+        binding.sbFontSize.progress = (viewModel.fontSize - 16).toInt()
+        binding.txtFontSize.text = viewModel.fontSize.toString()
+
         sbFontSize.setOnSeekBarChangeListener(object :
             OnSeekBarChangeListener {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
@@ -48,8 +51,8 @@ class OptionsFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 // TODO Auto-generated method stub
                 viewModel.fontSize = 16f + sbFontSize.progress.toFloat()
-                binding.txtNotationEx.textSize = viewModel.fontSize
                 binding.txtFontSize.text = viewModel.fontSize.toString()
+                binding.txtNotationEx.textSize = viewModel.fontSize
             }
         })
 

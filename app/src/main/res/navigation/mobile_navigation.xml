@@ -20,6 +20,11 @@
             app:destination="@id/nav_options"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_editNote"
+            app:destination="@id/nav_editNote"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
@@ -31,4 +36,8 @@
         android:id="@+id/nav_createNote"
         android:name="br.edu.up.app.ui.note.NoteFragment"
         tools:layout="@layout/fragment_create_note" />
+    <fragment
+        android:id="@+id/nav_editNote"
+        android:name="br.edu.up.app.ui.note.EditNoteFragment"
+        tools:layout="@layout/fragment_edit_note" />
 </navigation>

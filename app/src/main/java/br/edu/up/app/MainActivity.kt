@@ -39,18 +39,8 @@ class MainActivity : AppCompatActivity() {
 //        setSupportActionBar(binding.appBarMain.)
 //        setActionBar()
 
-        binding.appBarMain.fabAddNotes.setOnClickListener { view ->
-            viewModel.new()
-            val action = NotesFragmentDirections.actionHomeToNote()
-            findNavController(R.id.nav_host_fragment_content_main)
-                .navigate(action)
-        }
-        binding.appBarMain.fabOptions.setOnClickListener{view ->
-            viewModel.new()
-            val action = NotesFragmentDirections.actionNavHomeToNavGallery()
-            findNavController(R.id.nav_host_fragment_content_main)
-                .navigate(action)
-        }
+
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
