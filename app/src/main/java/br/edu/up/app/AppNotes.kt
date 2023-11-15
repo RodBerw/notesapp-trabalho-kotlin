@@ -22,8 +22,8 @@ import javax.inject.Singleton
 class AppNotes : Application() {
 
     @Provides
-    fun provideNoteRepository(notesDao: NotesDao)
-            : NoteRepository{
+    fun provideNoteRepositorySQLite(notesDao: NotesDao)
+            : NoteRepositorySQLite{
         return NoteRepositorySQLite(notesDao)
     }
 

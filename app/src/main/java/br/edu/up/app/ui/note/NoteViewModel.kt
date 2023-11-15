@@ -4,16 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.edu.up.app.data.Note
 import br.edu.up.app.data.NoteRepository
+import br.edu.up.app.data.NoteRepositoryFirebase
+import br.edu.up.app.data.NoteRepositorySQLite
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel
     //Faz a injeção de dependências usando a interface NoteRepository
-    @Inject constructor(val repository: NoteRepository) : ViewModel() {
+    @Inject constructor(val repository: NoteRepositorySQLite, val remoteRepository: NoteRepositoryFirebase) : ViewModel() {
 
     var note: Note = Note()
 
@@ -25,6 +28,7 @@ class NoteViewModel
         viewModelScope.launch {
             //Observa constantemente o valor da lista notes fornecido pelo repositório,
             // e reaje sempre que atualizado
+
             repository.notes.collect{ notes ->
                 _notes.value = notes
             }
