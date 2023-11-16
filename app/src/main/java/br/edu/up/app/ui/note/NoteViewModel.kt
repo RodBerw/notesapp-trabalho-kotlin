@@ -1,5 +1,6 @@
 package br.edu.up.app.ui.note
 
+import android.net.ConnectivityManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.edu.up.app.data.Note
@@ -32,6 +33,10 @@ class NoteViewModel
             repository.notes.collect{ notes ->
                 _notes.value = notes
             }
+
+            ConnectivityManager.OnNetworkActiveListener {
+                save()
+            }
         }
     }
 
@@ -45,6 +50,11 @@ class NoteViewModel
 
     fun save() = viewModelScope.launch {
         repository.save(note)
+        try{
+            remoteRepository.save(note)
+        }catch (ex: Exception){
+            print(ex)
+        }
     }
 
     fun delete(note: Note) = viewModelScope.launch {
