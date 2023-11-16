@@ -33,7 +33,6 @@ class OptionsFragment : Fragment() {
 
         var darkModeSwitch: Switch = binding.switchDarkMode
         var sbFontSize: SeekBar = binding.sbFontSize
-        var postItImgName: String = view?.findViewById<RadioButton>(binding.rgColors.checkedRadioButtonId)?.text.toString()
 
         binding.sbFontSize.progress = (viewModel.fontSize - 16).toInt()
         binding.txtFontSize.text = viewModel.fontSize.toString()

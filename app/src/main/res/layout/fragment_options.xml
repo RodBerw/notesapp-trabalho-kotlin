@@ -11,13 +11,10 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_margin="10dp"
-        android:layout_marginBottom="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/rg_colors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_font_size"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/postit" />
 
     <TextView
@@ -81,8 +78,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rg_colors"
-        app:layout_constraintVertical_bias="0.07999998" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPostItEx"
+        app:layout_constraintVertical_bias="0.13" />
 
     <TextView
         android:id="@+id/txt_fontSize"
@@ -99,41 +96,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_postit_color2"
         app:layout_constraintVertical_bias="0.050000012" />
-
-    <RadioGroup
-        android:id="@+id/rg_colors"
-        android:layout_width="317dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:checkedButton="@id/rb_yellow"
-        android:layoutDirection="inherit"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_font_size">
-
-        <RadioButton
-            android:id="@+id/rb_yellow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Yellow" />
-
-        <RadioButton
-            android:id="@+id/rb_blue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Blue" />
-
-        <RadioButton
-            android:id="@+id/rb_pink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Pink" />
-
-    </RadioGroup>
 
     <Switch
         android:id="@+id/switch_dark_mode"
