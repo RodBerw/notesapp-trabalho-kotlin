@@ -7,6 +7,7 @@ import br.edu.up.app.data.Note
 import br.edu.up.app.data.NoteRepository
 import br.edu.up.app.data.NoteRepositoryFirebase
 import br.edu.up.app.data.NoteRepositorySQLite
+import com.google.firebase.firestore.CollectionReference
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class NoteViewModel
     //Faz a injeção de dependências usando a interface NoteRepository
-    @Inject constructor(val repository: NoteRepositorySQLite, val remoteRepository: NoteRepositoryFirebase) : ViewModel() {
+    @Inject constructor(val repository: NoteRepositorySQLite, val remoteRepository: NoteRepositoryFirebase, private val notesRef: CollectionReference
+    ) : ViewModel() {
 
     var note: Note = Note()
 
@@ -49,16 +51,25 @@ class NoteViewModel
     }
 
     fun save() = viewModelScope.launch {
-        repository.save(note)
         try{
+            if(note.docId == null){
+                val doc = notesRef.document()
+                note.docId = doc.id;
+            }
             remoteRepository.save(note)
         }catch (ex: Exception){
             print(ex)
         }
+        repository.save(note)
     }
 
     fun delete(note: Note) = viewModelScope.launch {
         repository.delete(note)
+        try{
+            remoteRepository.delete(note)
+        }catch (ex: Exception){
+            print(ex)
+        }
     }
 }
 
