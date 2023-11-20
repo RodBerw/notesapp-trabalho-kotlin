@@ -1,5 +1,6 @@
 package br.edu.up.app.data
 
+import com.google.protobuf.Empty
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -12,10 +13,10 @@ class NoteRepositorySQLite
 
     override suspend fun save(note: Note) {
         if (note.id == 0) {
-            notesDao.insert(note)
-        } else {
-            notesDao.edit(note)
-        }
+                notesDao.insert(note)
+            } else {
+                notesDao.edit(note)
+            }
     }
 
     override suspend fun delete(note: Note) {

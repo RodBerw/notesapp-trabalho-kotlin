@@ -2,6 +2,7 @@ package br.edu.up.app
 
 import android.app.Application
 import android.content.Context
+import androidx.lifecycle.ViewModelProvider
 import br.edu.up.app.data.*
 import br.edu.up.app.ui.note.NoteViewModel
 import com.google.firebase.firestore.CollectionReference
@@ -41,7 +42,6 @@ class AppNotes : Application() {
     fun provideNotesRef(): CollectionReference{
         return Firebase.firestore.collection("notes")
     }
-
 
 
     @Provides
